@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>未来設計ワークシート｜縁結び 晴日</title>
+<style>
+:root{
+  --base:#fffdfb;
+  --main:#e88383;
+  --main2:#f4a4a4;
+  --gold:#e6c29d;
+  --ink:#4a3b32;
+  --muted:#7c6b61;
+  --green:#06c755;
+  --soft:#fff6f3;
+  --line:#ecd9cf;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  background:linear-gradient(180deg,#fff7f5,#fffdfb);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:0 12px 110px}
+.hero{
+  margin:0 -12px;
+  padding:26px 16px 22px;
+  text-align:center;
+  background:linear-gradient(135deg,#fff0f3,#fff9ee);
+  border-bottom:1px solid #f1ddd2;
+}
+.logo{
+  width:74px;height:74px;margin:0 auto 12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--main),var(--gold));
+  display:flex;align-items:center;justify-content:center;color:white;
+  font-size:25px;font-weight:800;box-shadow:0 10px 24px rgba(170,90,80,.16)
+}
+.badge{
+  display:inline-block;background:#fff;border:1px solid var(--gold);
+  color:#9b6a39;padding:5px 13px;border-radius:999px;font-size:12px
+}
+h1{color:#b85f66;font-size:24px;line-height:1.42;margin:12px 0 8px}
+.hero p{font-size:14px;margin:8px auto;max-width:520px;color:#5d504a}
+.progress{
+  position:sticky;top:0;z-index:10;margin:0 -14px;padding:8px 14px;
+  background:rgba(255,253,251,.94);backdrop-filter:blur(8px);border-bottom:1px solid #f0dfd7
+}
+.progressbar{height:8px;background:#f6e8e1;border-radius:999px;overflow:hidden}
+.progressbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--gold));transition:.25s}
+.progress small{display:block;text-align:center;margin-top:3px;color:var(--muted);font-size:11px}
+.section{
+  background:white;border-radius:20px;margin:14px 0;padding:18px 13px;
+  box-shadow:0 8px 22px rgba(80,60,50,.06);border:1px solid #f2e4dd
+}
+h2{color:#b85f66;font-size:19px;margin:0 0 8px;border-left:5px solid var(--gold);padding-left:10px}
+.lead{font-size:13px;color:#75645b;margin:6px 0 12px}
+label.title{font-weight:700;display:block;margin:14px 0 6px;font-size:15px}
+input,textarea,select{
+  width:100%;border:1px solid #e6d5ca;border-radius:13px;padding:13px 12px;
+  background:#fffdfb;font-size:16px;color:var(--ink);appearance:auto;min-height:48px;
+}
+input[readonly]{background:#fff5f4;color:#b85f66;font-weight:700}
+textarea{min-height:92px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr;gap:9px}
+.score-row{
+  display:grid;grid-template-columns:78px 1fr 42px;gap:7px;align-items:center;margin:10px 0;font-size:14px
+}
+.score-row input[type=range]{padding:0}
+.score{text-align:center;font-weight:800;color:#b85f66;background:#fff5f4;border-radius:10px;padding:3px 0}
+.options label{
+  display:block;background:#fff9f7;border:1px solid #eedbd2;border-radius:14px;
+  padding:11px 12px;margin:8px 0;font-size:15px
+}
+.options input{width:auto;margin-right:6px}
+.chipgrid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.chipgrid label{background:#fff9f7;border:1px solid #eedbd2;border-radius:14px;padding:10px 12px;font-size:15px}.chipgrid input{width:auto;margin-right:6px}@media(min-width:560px){.chipgrid{grid-template-columns:1fr 1fr}}
+.btn{
+  display:block;width:100%;border:none;border-radius:999px;padding:15px 14px;margin-top:12px;
+  font-size:16px;font-weight:800;text-align:center;text-decoration:none;cursor:pointer
+}
+.primary{background:var(--main);color:white}
+.pdf{background:#4a3b32;color:white}
+.line{background:var(--green);color:white}
+.outline{background:white;color:#b85f66;border:1px solid #f1c9c9}
+.result{display:none;margin-top:16px;padding:16px;background:white;border:2px solid #eedbd2;border-radius:18px}
+.note{background:#fff8ec;border-left:5px solid var(--gold);border-radius:12px;padding:12px;font-size:12px;color:#6b5d55}
+.fixedActions{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,253,251,.96);
+  border-top:1px solid #ecd9cf;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 20px rgba(80,60,50,.08)
+}
+.fixedActions .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:520px;margin:0 auto}
+.fixedActions button{margin:0;padding:13px 8px;font-size:14px}
+#pdfArea{display:none;background:white;padding:28px;color:#4a3b32;width:760px}
+.pdf-title{text-align:center;color:#b85f66;font-size:24px;margin-bottom:8px;font-weight:800}
+.pdf-sub{text-align:center;color:#7c6b61;margin-bottom:22px}
+.pdf-box{border:1px solid #e6d5ca;border-radius:16px;padding:16px;margin:14px 0}
+.pdf-box h3{color:#b85f66;margin:0 0 8px}
+.footer{text-align:center;color:#7c6b61;font-size:12px;padding:22px 0}
+@media(min-width:560px){
+  .wrap{max-width:560px;padding-left:16px;padding-right:16px}
+  .hero{margin:0 -16px}
+  h1{font-size:30px}
+  .grid{grid-template-columns:1fr 1fr}
+  .section{padding:24px}
+  .score-row{grid-template-columns:105px 1fr 50px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="logo">晴日</div>
+  <div class="badge">縁結び 晴日｜未来設計ワークシート</div>
+  <h1>今を見つめ、<br>明日を描いてみよう</h1>
+  <p>スマホで入力しやすいセミナー用ワークシートです。最後に「アンケート結果を送る」を押すとスプレッドシートへ保存され、公式LINEへ送るメッセージを用意します。送られた内容をもとに、後日あなた専用の「未来設計診断カード」をプレゼントします🎁</p>
+</header>
+
+<div class="progress">
+  <div class="progressbar"><span id="bar"></span></div>
+  <small id="progressText">入力状況 0%</small>
+</div>
+
+<form id="seminarForm">
+<section class="section">
+<h2>基本情報</h2>
+<div class="grid">
+  <div><label class="title">氏名</label><input name="氏名" required placeholder="例：春日 晴日"></div>
+  <div><label class="title">LINE表示名</label><input name="LINE表示名" placeholder="例：はるひ"></div>
+  <div><label class="title">生年月日</label><input type="date" name="生年月日"></div>
+  <div><label class="title">年齢</label><input type="number" name="年齢" placeholder="例：35"></div>
+  <div><label class="title">居住地</label><input name="居住地" placeholder="例：大分市"></div>
+  <div><label class="title">職業</label><input name="職業" placeholder="例：会社員"></div>
+</div>
+<label class="title">勤務形態</label>
+<select name="勤務形態">
+<option value="">選択してください</option><option>日勤</option><option>夜勤あり</option><option>シフト制</option><option>土日勤務</option><option>フレックス</option><option>自営業</option><option>その他</option>
+</select>
+
+<label class="title">紹介者 任意</label>
+<input name="紹介者" placeholder="紹介者がいる場合のみ入力">
+
+<input type="hidden" name="セミナー名" value="今を見つめ、明日を描いてみよう">
+</section>
+
+<section class="section">
+<h2>人生満足度チェック</h2>
+<p class="lead">今の満足度を0〜10点でつけてみましょう。</p>
+<div class="score-row"><span>仕事</span><input type="range" name="仕事満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>お金</span><input type="range" name="お金満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>健康</span><input type="range" name="健康満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>人間関係</span><input type="range" name="人間関係満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>恋愛</span><input type="range" name="恋愛満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>自分磨き</span><input type="range" name="自分磨き満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="score-row"><span>趣味</span><input type="range" name="趣味満足度" min="0" max="10" value="5"><span class="score">5</span></div>
+<div class="grid">
+  <div>
+    <label class="title">一番高い項目 自動抽出</label>
+    <input id="highestDisplay" readonly placeholder="自動で表示されます">
+    <input type="hidden" name="一番高い項目" id="highestHidden">
+  </div>
+  <div>
+    <label class="title">一番低い項目 自動抽出</label>
+    <input id="lowestDisplay" readonly placeholder="自動で表示されます">
+    <input type="hidden" name="一番低い項目" id="lowestHidden">
+  </div>
+</div>
+<label class="title">満足度の理由</label>
+<textarea name="満足度の理由" placeholder="なぜその点数にしたのか、自由に書いてください"></textarea>
+</section>
+
+<section class="section">
+<h2>人生の転機</h2>
+<p class="lead">自分に影響を与えた出来事や出会いを3つ書いてみましょう。</p>
+<div class="grid">
+  <input name="人生の転機①" placeholder="人生の転機①">
+  <input name="人生の転機②" placeholder="人生の転機②">
+  <input name="人生の転機③" placeholder="人生の転機③">
+</div>
+<label class="title">転機から学んだこと</label>
+<textarea name="転機から学んだこと" placeholder="その経験から何を学びましたか？"></textarea>
+</section>
+
+<section class="section">
+<h2>3年後の理想の人生</h2>
+<label class="title">未来新聞タイトル</label>
+<input name="未来新聞タイトル" placeholder="例：家族4人で新生活スタート">
+<div class="grid">
+  <input name="3年後の居住地" placeholder="居住地　例：海の見える街">
+  <input name="3年後の仕事" placeholder="仕事　例：好きな仕事で年収700万円">
+</div>
+<label class="title">3年後の休日の過ごし方</label>
+<textarea name="3年後の休日の過ごし方" placeholder="どんな休日を過ごしていますか？"></textarea>
+<label class="title">3年後に一緒にいる人</label>
+<input name="3年後に一緒にいる人" placeholder="例：パートナー、家族、友人">
+<label class="title">理想年収</label>
+<select name="理想年収">
+<option value="">選択してください</option><option>300万円未満</option><option>300〜500万円</option><option>500〜700万円</option><option>700〜1000万円</option><option>1000万円以上</option>
+</select>
+<label class="title">理想の暮らし</label>
+<textarea name="理想の暮らし" placeholder="住まい・仕事・人間関係・暮らし方など"></textarea>
+
+<label class="title">その時のあなたは何歳？</label>
+<input type="number" name="未来年齢" placeholder="例：41">
+
+<label class="title">その時、一番幸せだと感じる瞬間は？</label>
+<textarea name="幸せを感じる瞬間" placeholder="例：家族で食卓を囲んで笑っている時"></textarea>
+</section>
+
+<section class="section">
+<h2>結婚観</h2>
+<label class="title">結婚希望時期</label>
+<select name="結婚希望時期">
+<option value="">選択してください</option><option>1年以内</option><option>3年以内</option><option>5年以内</option><option>いつかはしたい</option><option>まだ分からない</option>
+</select>
+<label class="title">理想の結婚年齢</label>
+<input type="number" name="理想の結婚年齢" placeholder="例：38">
+<label class="title">子ども希望</label>
+<select name="子ども希望">
+<option value="">選択してください</option><option>欲しい</option><option>どちらかと言えば欲しい</option><option>分からない</option><option>希望しない</option>
+</select>
+<label class="title">理想の家族像</label>
+<textarea name="理想の家族像" placeholder="どんな家庭・家族関係が理想ですか？"></textarea>
+</section>
+
+<section class="section">
+<h2>人生で大切にしたい価値観</h2>
+<p class="lead">あなたが人生で大切にしたい価値観を最大3つ選んでください。</p>
+<div class="chipgrid" data-max-group="values">
+<label><input type="checkbox" name="価値観選択" value="家族"> 家族</label>
+<label><input type="checkbox" name="価値観選択" value="愛情"> 愛情</label>
+<label><input type="checkbox" name="価値観選択" value="健康"> 健康</label>
+<label><input type="checkbox" name="価値観選択" value="自由"> 自由</label>
+<label><input type="checkbox" name="価値観選択" value="安定"> 安定</label>
+<label><input type="checkbox" name="価値観選択" value="成長"> 成長</label>
+<label><input type="checkbox" name="価値観選択" value="挑戦"> 挑戦</label>
+<label><input type="checkbox" name="価値観選択" value="仕事"> 仕事</label>
+<label><input type="checkbox" name="価値観選択" value="仲間"> 仲間</label>
+<label><input type="checkbox" name="価値観選択" value="お金"> お金</label>
+<label><input type="checkbox" name="価値観選択" value="貢献"> 貢献</label>
+<label><input type="checkbox" name="価値観選択" value="楽しさ"> 楽しさ</label>
+<label><input type="checkbox" name="価値観選択" value="学び"> 学び</label>
+<label><input type="checkbox" name="価値観選択" value="信頼"> 信頼</label>
+<label><input type="checkbox" name="価値観選択" value="誠実さ"> 誠実さ</label>
+</div>
+</section>
+
+<section class="section">
+<h2>理想のパートナー像</h2>
+<label class="title">譲れない条件 最大3つ</label>
+<p class="lead">20項目から最大3つ選んでください。</p>
+<div class="chipgrid" data-max-group="must">
+<label><input type="checkbox" name="譲れない条件選択" value="誠実さ"> 誠実さ</label>
+<label><input type="checkbox" name="譲れない条件選択" value="優しさ"> 優しさ</label>
+<label><input type="checkbox" name="譲れない条件選択" value="価値観が合う"> 価値観が合う</label>
+<label><input type="checkbox" name="譲れない条件選択" value="会話が合う"> 会話が合う</label>
+<label><input type="checkbox" name="譲れない条件選択" value="金銭感覚が近い"> 金銭感覚が近い</label>
+<label><input type="checkbox" name="譲れない条件選択" value="家族を大切にする"> 家族を大切にする</label>
+<label><input type="checkbox" name="譲れない条件選択" value="子ども好き"> 子ども好き</label>
+<label><input type="checkbox" name="譲れない条件選択" value="清潔感"> 清潔感</label>
+<label><input type="checkbox" name="譲れない条件選択" value="健康意識"> 健康意識</label>
+<label><input type="checkbox" name="譲れない条件選択" value="仕事への理解"> 仕事への理解</label>
+<label><input type="checkbox" name="譲れない条件選択" value="安定した収入"> 安定した収入</label>
+<label><input type="checkbox" name="譲れない条件選択" value="向上心"> 向上心</label>
+<label><input type="checkbox" name="譲れない条件選択" value="一緒にいて楽しい"> 一緒にいて楽しい</label>
+<label><input type="checkbox" name="譲れない条件選択" value="趣味が合う"> 趣味が合う</label>
+<label><input type="checkbox" name="譲れない条件選択" value="行動力"> 行動力</label>
+<label><input type="checkbox" name="譲れない条件選択" value="思いやり"> 思いやり</label>
+<label><input type="checkbox" name="譲れない条件選択" value="感謝を伝えられる"> 感謝を伝えられる</label>
+<label><input type="checkbox" name="譲れない条件選択" value="約束を守る"> 約束を守る</label>
+<label><input type="checkbox" name="譲れない条件選択" value="ポジティブ思考"> ポジティブ思考</label>
+<label><input type="checkbox" name="譲れない条件選択" value="結婚への真剣度"> 結婚への真剣度</label>
+</div>
+<label class="title">あったら嬉しい条件 最大3つ</label>
+<p class="lead">20項目から最大3つ選んでください。</p>
+<div class="chipgrid" data-max-group="nice">
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="誠実さ"> 誠実さ</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="優しさ"> 優しさ</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="価値観が合う"> 価値観が合う</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="会話が合う"> 会話が合う</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="金銭感覚が近い"> 金銭感覚が近い</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="家族を大切にする"> 家族を大切にする</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="子ども好き"> 子ども好き</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="清潔感"> 清潔感</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="健康意識"> 健康意識</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="仕事への理解"> 仕事への理解</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="安定した収入"> 安定した収入</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="向上心"> 向上心</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="一緒にいて楽しい"> 一緒にいて楽しい</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="趣味が合う"> 趣味が合う</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="行動力"> 行動力</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="思いやり"> 思いやり</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="感謝を伝えられる"> 感謝を伝えられる</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="約束を守る"> 約束を守る</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="ポジティブ思考"> ポジティブ思考</label>
+<label><input type="checkbox" name="あったら嬉しい条件選択" value="結婚への真剣度"> 結婚への真剣度</label>
+</div>
+<label class="title">理想のパートナー像</label>
+<textarea name="理想のパートナー像" placeholder="どんな人と一緒にいたいですか？"></textarea>
+<label class="title">理想の関係性</label>
+<textarea name="理想の関係性" placeholder="どんな関係を築きたいですか？"></textarea>
+</section>
+
+<section class="section">
+<h2>現在の婚活状況</h2>
+<label class="title">現在の出会い状況</label>
+<select name="現在の出会い状況">
+<option value="">選択してください</option><option>全くない</option><option>少ない</option><option>普通</option><option>多い</option>
+</select>
+<label class="title">現在利用中の婚活サービス</label>
+<div class="options">
+<label><input type="checkbox" name="現在利用中の婚活サービス" value="マッチングアプリ"> マッチングアプリ</label>
+<label><input type="checkbox" name="現在利用中の婚活サービス" value="友人紹介"> 友人紹介</label>
+<label><input type="checkbox" name="現在利用中の婚活サービス" value="婚活パーティー"> 婚活パーティー</label>
+<label><input type="checkbox" name="現在利用中の婚活サービス" value="結婚相談所"> 結婚相談所</label>
+<label><input type="checkbox" name="現在利用中の婚活サービス" value="利用していない"> 利用していない</label>
+</div>
+<label class="title">今の婚活レベル</label>
+<select name="婚活レベル">
+<option value="">選択してください</option><option>まだ何もしていない</option><option>情報収集中</option><option>マッチングアプリ利用中</option><option>婚活イベント参加中</option><option>結婚相談所を検討中</option><option>本格的に婚活中</option>
+</select>
+<label class="title">婚活経験</label>
+<select name="婚活経験">
+<option value="">選択してください</option><option>初めて</option><option>少しある</option><option>現在活動中</option><option>以前かなり活動した</option>
+</select>
+<label class="title">交際経験</label>
+<select name="交際経験">
+<option value="">選択してください</option><option>交際経験なし</option><option>1〜2人</option><option>3〜5人</option><option>6人以上</option>
+</select>
+<label class="title">婚活の悩み</label>
+<textarea name="婚活の悩み" placeholder="出会いがない、自信がない、何から始めるか分からない等"></textarea>
+</section>
+
+<section class="section">
+<h2>未来への行動宣言</h2>
+<label class="title">24時間以内にやること</label>
+<textarea name="24時間以内にやること" placeholder="明日までにできる小さな一歩"></textarea>
+<label class="title">1ヶ月以内にやること</label>
+<textarea name="1ヶ月以内にやること" placeholder="1ヶ月以内に取り組みたいこと"></textarea>
+
+<label class="title">今日の自分から未来の自分へのメッセージ</label>
+<textarea name="未来へのメッセージ" placeholder="例：焦らなくて大丈夫。今日の一歩を大切にしながら、理想の人生へ進んでいこう。"></textarea>
+</section>
+
+<section class="section">
+<h2>興味・相談希望</h2>
+<div class="options">
+<label><input type="checkbox" name="興味あり_婚活タイプ診断" value="はい"> 婚活タイプ診断</label>
+<label><input type="checkbox" name="興味あり_個性心理学診断" value="はい"> 個性心理学診断</label>
+<label><input type="checkbox" name="興味あり_宿命鑑定" value="はい"> 宿命鑑定</label>
+<label><input type="checkbox" name="興味あり_無料婚活相談" value="はい"> 無料婚活相談</label>
+<label><input type="checkbox" name="興味あり_結婚相談所説明" value="はい"> 結婚相談所説明</label>
+</div>
+<label class="title">個別相談希望度</label>
+<select name="個別相談希望度">
+<option value="">選択してください</option><option>今すぐ相談したい</option><option>一度話を聞いてみたい</option><option>少し興味がある</option><option>情報だけ欲しい</option><option>希望しない</option>
+</select>
+<label class="title">希望連絡方法</label>
+<select name="希望連絡方法">
+<option value="">選択してください</option><option>LINE</option><option>メール</option><option>電話</option><option>連絡不要</option>
+</select>
+<label class="title">連絡先</label>
+<input name="連絡先" placeholder="LINE ID / メール / 電話番号など">
+
+<button id="sendBtn" class="btn primary" type="submit">アンケート結果を送る</button>
+<a id="lineButton" class="btn line" href="https://line.me/R/ti/p/@056indci" target="_blank">公式LINEへ送る</a>
+
+<div id="result" class="result"></div>
+<p class="note">「アンケート結果を送る」を押すと、スプレッドシートに保存します。その後、公式LINEのメッセージ欄に「アンケート完了」などが入った状態で開けます。</p>
+</section>
+</form>
+
+<div id="pdfArea">
+  <div class="pdf-title">未来設計シート</div>
+  <div class="pdf-sub">縁結び 晴日｜今を見つめ、明日を描いてみよう</div>
+  <div class="pdf-box"><h3>基本情報</h3><p id="pdfBasic"></p></div>
+  <div class="pdf-box"><h3>人生満足度</h3><p id="pdfScore"></p></div>
+  <div class="pdf-box"><h3>人生の転機</h3><p id="pdfTurning"></p></div>
+  <div class="pdf-box"><h3>3年後の理想の人生</h3><p id="pdfFuture"></p></div>
+  <div class="pdf-box"><h3>理想のパートナー像</h3><p id="pdfPartner"></p></div>
+  <div class="pdf-box"><h3>婚活タイプ診断</h3><p id="pdfType"></p></div>
+  <div class="pdf-box"><h3>未来への行動宣言</h3><p id="pdfAction"></p></div>
+  <p style="text-align:center;color:#7c6b61;margin-top:24px;">今日の気づきが、これからの未来を晴れやかに照らしますように。<br>縁結び 晴日</p>
+</div>
+
+<div class="footer">縁結び 晴日｜ご縁を結び、未来を照らす</div>
+</div>
+
+<div class="fixedActions">
+  <div class="row">
+    <button class="btn primary" type="button" onclick="document.getElementById('sendBtn').click()">結果を送る</button>
+    <button class="btn line" type="button" onclick="openLine()">LINEを開く</button>
+  </div>
+</div>
+
+<script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzcWcAC_uObHDwIc-M_W0yHwFKiRryZxq8B7d2s6QvS23pysNPq-VSRR3JfJBKRCXaf/exec";
+const LINE_URL = "https://line.me/R/ti/p/@056indci";
+let latestData = null;
+
+document.querySelectorAll('input[type="range"]').forEach(r => {
+  const s = r.parentElement.querySelector('.score');
+  r.addEventListener('input', () => { s.textContent = r.value; updateHighLow(); updateProgress(); });
+});
+
+function updateHighLow(){
+  const scoreNames = [
+    "仕事満足度",
+    "お金満足度",
+    "健康満足度",
+    "人間関係満足度",
+    "恋愛満足度",
+    "自分磨き満足度",
+    "趣味満足度"
+  ];
+  const labelMap = {
+    "仕事満足度":"仕事",
+    "お金満足度":"お金",
+    "健康満足度":"健康",
+    "人間関係満足度":"人間関係",
+    "恋愛満足度":"恋愛",
+    "自分磨き満足度":"自分磨き",
+    "趣味満足度":"趣味"
+  };
+  const scores = scoreNames.map(name => {
+    const el = document.querySelector(`input[name="${name}"]`);
+    return {name, label: labelMap[name], value: Number(el?.value || 0)};
+  });
+  const max = Math.max(...scores.map(s => s.value));
+  const min = Math.min(...scores.map(s => s.value));
+  const highest = scores.filter(s => s.value === max).map(s => `${s.label}(${s.value})`).join("、");
+  const lowest = scores.filter(s => s.value === min).map(s => `${s.label}(${s.value})`).join("、");
+
+  document.getElementById("highestDisplay").value = highest;
+  document.getElementById("lowestDisplay").value = lowest;
+  document.getElementById("highestHidden").value = highest;
+  document.getElementById("lowestHidden").value = lowest;
+}
+
+
+document.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+
+
+function setupMaxCheckboxes(groupName, maxCount){
+  const boxes = Array.from(document.querySelectorAll(`[data-max-group="${groupName}"] input[type="checkbox"]`));
+  boxes.forEach(box => {
+    box.addEventListener("change", () => {
+      const checked = boxes.filter(b => b.checked);
+      if(checked.length > maxCount){
+        box.checked = false;
+        alert(`最大${maxCount}つまで選択できます`);
+      }
+    });
+  });
+}
+setupMaxCheckboxes("values", 3);
+setupMaxCheckboxes("must", 3);
+setupMaxCheckboxes("nice", 3);
+
+function updateProgress(){
+  const fields = Array.from(document.querySelectorAll('input[name], textarea[name], select[name]'))
+    .filter(el => el.type !== 'hidden' && el.type !== 'checkbox' && el.type !== 'range');
+  const filled = fields.filter(el => String(el.value || '').trim() !== '').length;
+  const percent = Math.min(100, Math.round((filled / Math.max(fields.length,1)) * 100));
+  document.getElementById('bar').style.width = percent + '%';
+  document.getElementById('progressText').textContent = '入力状況 ' + percent + '%';
+}
+
+function getFormData(){
+  updateHighLow();
+  const fd = new FormData(document.getElementById("seminarForm"));
+  const data = {};
+  fd.forEach((v,k) => {
+    if(data[k]) data[k] += "、" + v;
+    else data[k] = v;
+  });
+
+  data["回答日時"] = new Date().toLocaleString("ja-JP");
+  data["セミナー名"] = "今を見つめ、明日を描いてみよう";
+
+  // 最大3つ選択の項目を①②③へ分けて保存
+  function splitChecked(sourceName, destBase){
+    const selected = Array.from(document.querySelectorAll(`input[name="${sourceName}"]:checked`)).map(el => el.value).slice(0,3);
+    data[destBase + "①"] = selected[0] || "";
+    data[destBase + "②"] = selected[1] || "";
+    data[destBase + "③"] = selected[2] || "";
+    data[sourceName] = selected.join("、");
+  }
+  splitChecked("価値観選択", "価値観");
+  splitChecked("譲れない条件選択", "譲れない条件");
+  splitChecked("あったら嬉しい条件選択", "あったら嬉しい条件");
+
+
+  // 利用中サービス：チェックがあれば「はい」、なければ「いいえ」
+  const serviceItems = ["マッチングアプリ","友人紹介","婚活パーティー","結婚相談所","利用していない"];
+  serviceItems.forEach(item => {
+    data["利用中_" + item] = document.querySelector(`input[name="現在利用中の婚活サービス"][value="${item}"]`)?.checked ? "はい" : "いいえ";
+  });
+
+  // 既存の「現在利用中の婚活サービス」列にも、見やすい形で保存
+  data["現在利用中の婚活サービス"] = serviceItems.map(item => `${item}:${data["利用中_" + item]}`).join(" / ");
+
+  // 興味・相談希望：チェックがあれば「はい」、なければ「いいえ」
+  const interestItems = [
+    "興味あり_婚活タイプ診断",
+    "興味あり_個性心理学診断",
+    "興味あり_宿命鑑定",
+    "興味あり_無料婚活相談",
+    "興味あり_結婚相談所説明"
+  ];
+  interestItems.forEach(name => {
+    data[name] = document.querySelector(`input[name="${name}"]`)?.checked ? "はい" : "いいえ";
+  });
+
+  const diag = diagnose(data);
+  Object.assign(data, diag);
+
+  data["流入経路"] = "セミナーHTML";
+  data["紹介者"] = data["紹介者"] || "";
+  data["担当者メモ"] = "";
+  data["相談実施日"] = "";
+  data["相談結果"] = "";
+  data["入会見込み"] = "";
+  data["次回連絡予定日"] = "";
+  data["フォロー状況"] = "";
+  return data;
+}
+
+function diagnose(d){
+  let anshin=0, kyokan=0, koudou=0, keikaku=0, shakou=0;
+  const rel = (d["理想の関係性"] || "") + (d["理想のパートナー像"] || "") + (d["理想の家族像"] || "") + (d["価値観選択"] || "") + (d["譲れない条件選択"] || "") + (d["あったら嬉しい条件選択"] || "");
+  if(rel.match(/安心|信頼|穏やか|安定|本音/)) anshin += 3;
+  if(rel.match(/優しい|思いやり|寄り添|共感|会話/)) kyokan += 3;
+  if((d["結婚希望時期"] || "").includes("1年")) keikaku += 3;
+  if((d["結婚希望時期"] || "").includes("3年")) keikaku += 2;
+  if((d["現在利用中の婚活サービス"] || "").includes("マッチングアプリ")) koudou += 2;
+  if((d["婚活経験"] || "").includes("活動")) koudou += 2;
+  if((d["現在の出会い状況"] || "") === "多い") shakou += 3;
+  if(Number(d["自分磨き満足度"] || 0) >= 7) koudou += 1;
+  if(Number(d["恋愛満足度"] || 0) <= 4) keikaku += 1;
+  const scores = {"安心型":anshin, "共感型":kyokan, "行動型":koudou, "計画型":keikaku, "社交型":shakou};
+  let type = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  if(Object.values(scores).every(v=>v===0)) type = "バランス型";
+  return {"婚活タイプ診断結果":type,"安心度":anshin,"共感度":kyokan,"行動力":koudou,"計画性":keikaku,"社交性":shakou};
+}
+
+function fillPdf(d){
+  document.getElementById("pdfBasic").innerHTML =
+    `氏名：${d["氏名"]||""}<br>LINE表示名：${d["LINE表示名"]||""}<br>生年月日：${d["生年月日"]||""}<br>年齢：${d["年齢"]||""}<br>居住地：${d["居住地"]||""}<br>職業：${d["職業"]||""}<br>勤務形態：${d["勤務形態"]||""}`;
+  document.getElementById("pdfScore").innerHTML =
+    `仕事：${d["仕事満足度"]}/10　お金：${d["お金満足度"]}/10　健康：${d["健康満足度"]}/10<br>
+    人間関係：${d["人間関係満足度"]}/10　恋愛：${d["恋愛満足度"]}/10　自分磨き：${d["自分磨き満足度"]}/10　趣味：${d["趣味満足度"]}/10<br>
+    一番高い項目：${d["一番高い項目"]||""}<br>一番低い項目：${d["一番低い項目"]||""}<br>理由：${d["満足度の理由"]||""}`;
+  document.getElementById("pdfTurning").innerHTML =
+    `① ${d["人生の転機①"]||""}<br>② ${d["人生の転機②"]||""}<br>③ ${d["人生の転機③"]||""}<br>学んだこと：${d["転機から学んだこと"]||""}`;
+  document.getElementById("pdfFuture").innerHTML =
+    `未来新聞タイトル：${d["未来新聞タイトル"]||""}<br>3年後の居住地：${d["3年後の居住地"]||""}<br>3年後の仕事：${d["3年後の仕事"]||""}<br>休日：${d["3年後の休日の過ごし方"]||""}<br>一緒にいる人：${d["3年後に一緒にいる人"]||""}<br>理想年収：${d["理想年収"]||""}<br>理想の暮らし：${d["理想の暮らし"]||""}<br>未来年齢：${d["未来年齢"]||""}<br>幸せを感じる瞬間：${d["幸せを感じる瞬間"]||""}<br>価値観：${d["価値観①"]||""}、${d["価値観②"]||""}、${d["価値観③"]||""}`;
+  document.getElementById("pdfPartner").innerHTML =
+    `結婚希望時期：${d["結婚希望時期"]||""}<br>理想の結婚年齢：${d["理想の結婚年齢"]||""}<br>子ども希望：${d["子ども希望"]||""}<br>理想の家族像：${d["理想の家族像"]||""}<br><br>
+    譲れない条件：${d["譲れない条件①"]||""}、${d["譲れない条件②"]||""}、${d["譲れない条件③"]||""}<br>
+    あったら嬉しい条件：${d["あったら嬉しい条件①"]||""}、${d["あったら嬉しい条件②"]||""}、${d["あったら嬉しい条件③"]||""}<br>
+    理想のパートナー像：${d["理想のパートナー像"]||""}<br>理想の関係性：${d["理想の関係性"]||""}`;
+  document.getElementById("pdfType").innerHTML =
+    `診断結果：${d["婚活タイプ診断結果"]}<br>安心度：${d["安心度"]}　共感度：${d["共感度"]}　行動力：${d["行動力"]}　計画性：${d["計画性"]}　社交性：${d["社交性"]}`;
+  document.getElementById("pdfAction").innerHTML =
+    `24時間以内：${d["24時間以内にやること"]||""}<br>1ヶ月以内：${d["1ヶ月以内にやること"]||""}<br>未来へのメッセージ：${d["未来へのメッセージ"]||""}<br>個別相談希望度：${d["個別相談希望度"]||""}`;
+}
+
+async function saveToSheet(d){
+  try{
+    await fetch(GAS_URL, {
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(d)
+    });
+    return "保存リクエスト送信済み";
+  }catch(e){
+    return "保存エラー";
+  }
+}
+
+function makeLineMessage(d){
+  return `アンケート完了
+
+【未来設計シート提出】
+氏名：${d["氏名"]||""}
+LINE表示名：${d["LINE表示名"]||""}
+
+婚活タイプ：
+${d["婚活タイプ診断結果"]||""}
+
+未来新聞タイトル：
+${d["未来新聞タイトル"]||""}
+
+未来年齢：
+${d["未来年齢"]||""}
+
+幸せを感じる瞬間：
+${d["幸せを感じる瞬間"]||""}
+
+大切にしたい価値観：
+${d["価値観①"]||""}、${d["価値観②"]||""}、${d["価値観③"]||""}
+
+理想の結婚年齢：
+${d["理想の結婚年齢"]||""}
+
+今の婚活レベル：
+${d["婚活レベル"]||""}
+
+理想の関係性：
+${d["理想の関係性"]||""}
+
+24時間以内にやること：
+${d["24時間以内にやること"]||""}
+
+未来へのメッセージ：
+${d["未来へのメッセージ"]||""}
+
+よろしくお願いします。
+
+未来設計診断カードのプレゼントを希望します🎁`;
+}
+
+document.getElementById("seminarForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const data = getFormData();
+  latestData = data;
+  fillPdf(data);
+  const status = await saveToSheet(data);
+  const lineHref = LINE_URL + "?text=" + encodeURIComponent(makeLineMessage(data));
+  document.getElementById("lineButton").href = lineHref;
+
+  const result = document.getElementById("result");
+  result.style.display = "block";
+  result.innerHTML = `
+    <h2>送信準備ができました</h2>
+    <p><strong>保存状況：</strong>${status}</p>
+    <p><strong>婚活タイプ：</strong>${data["婚活タイプ診断結果"]}</p>
+    <p>次に下の<strong>「公式LINEへ送る」</strong>を押すと、LINEのメッセージ欄に<strong>「アンケート完了」</strong>入りの文章が入った状態で開きます。送信後、内容をもとに未来設計診断カードをお届けします🎁</p>
+    <a class="btn line" href="${lineHref}" target="_blank">公式LINEへ送る</a>
+  `;
+  result.scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+
+function openLine(){
+  const d = latestData || getFormData();
+  const url = LINE_URL + "?text=" + encodeURIComponent(makeLineMessage(d));
+  window.open(url, "_blank");
+}
+updateHighLow();
+updateProgress();
+</script>
+</body>
+</html>
